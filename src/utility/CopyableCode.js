@@ -1,8 +1,10 @@
-import { Box, Code, IconButton, Tooltip, useClipboard } from '@chakra-ui/react';
+import { Code, IconButton, Tooltip, useClipboard } from '@chakra-ui/react';
 import { CopyIcon } from '@chakra-ui/icons';
+import { useState } from 'react';
 
 const CopyableCode = ({ code }) => {
   const { hasCopied, onCopy } = useClipboard(code);
+  const [tooltipActive, setTooltipActive] = useState(false);
 
   const handleCopy = () => {
     onCopy();
@@ -25,6 +27,7 @@ const CopyableCode = ({ code }) => {
       {code}
       <Tooltip
         label={hasCopied ? 'Copied to clipboard' : 'Click to copy'}
+        isOpen={tooltipActive}
         placement="top"
       >
         <IconButton
@@ -34,25 +37,12 @@ const CopyableCode = ({ code }) => {
           ml={2}
           h={5}
           onClick={handleCopy}
+          onMouseEnter={() => setTooltipActive(true)}
+          onMouseLeave={() => setTooltipActive(false)}
         />
       </Tooltip>
     </Code>
   );
-
-  //   const { hasCopied, onCopy } = useClipboard(code);
-
-  //   return (
-  //     <Code display="inline-flex" alignItems="center" p={1} borderRadius="md">
-  //       {code}
-  //       <IconButton
-  //         ml={1}
-  //         variant="ghost"
-  //         icon={<CopyIcon />}
-  //         aria-label="Copy to clipboard"
-  //         onClick={onCopy}
-  //       />
-  //     </Code>
-  //   );
 };
 
 export default CopyableCode;
