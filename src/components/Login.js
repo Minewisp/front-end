@@ -26,12 +26,7 @@ import {
 import CopyableCode from '../utility/CopyableCode';
 import { useState } from 'react';
 
-const LoginStage = ({
-  username,
-  setUsername,
-  handleLogin,
-  isButtonLoading,
-}) => {
+const LoginStage = ({ username, setUsername, handleLogin, isLoading }) => {
   return (
     <Stack divider={<StackDivider />} spacing={4}>
       <Box textAlign="center" spacing={4}>
@@ -62,7 +57,7 @@ const LoginStage = ({
         colorScheme="blue"
         type="submit"
         onClick={handleLogin}
-        isLoading={isButtonLoading}
+        isLoading={isLoading}
         loadingText="Generating OTP..."
       >
         Generate OTP
@@ -71,7 +66,7 @@ const LoginStage = ({
   );
 };
 
-const OtpStage = ({ otp, setOtp, handleOtpVerification, isButtonLoading }) => {
+const OtpStage = ({ otp, setOtp, handleOtpVerification, isLoading }) => {
   return (
     <Stack divider={<StackDivider />} spacing={4}>
       <Box textAlign="center" spacing={4}>
@@ -108,7 +103,7 @@ const OtpStage = ({ otp, setOtp, handleOtpVerification, isButtonLoading }) => {
       <Button
         colorScheme="blue"
         onClick={handleOtpVerification}
-        isLoading={isButtonLoading}
+        isLoading={isLoading}
         loadingText="Logging in..."
       >
         Login
@@ -122,12 +117,15 @@ export function Login() {
   const [stage, setStage] = useState(1);
   const [username, setUsername] = useState('');
   const [otp, setOtp] = useState('');
-  const [isButtonLoading, setButtonLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [modalData, setModalData] = useState({ title: '', message: '' });
 
   const handleLogin = () => {
-    setButtonLoading(true);
+    if (isLoading) return;
+    setLoading(true);
     setTimeout(() => {
+      // to write http request code here
+      setLoading(false);
       if (username !== 'Steve') {
         setModalData({
           title: 'Error',
@@ -135,18 +133,17 @@ export function Login() {
             "You don't seem to be online. Join the server to recieve an OTP.",
         });
         onOpen();
-        setButtonLoading(false);
         return;
       }
       setStage(2);
-      setButtonLoading(false);
     }, 750); // just testing
   };
 
   const handleOtpVerification = () => {
-    setButtonLoading(true);
+    if (isLoading) return;
+    setLoading(true);
     setTimeout(() => {
-      setButtonLoading(false);
+      setLoading(false);
     }, 750);
   };
 
@@ -176,7 +173,7 @@ export function Login() {
             username={username}
             setUsername={setUsername}
             handleLogin={handleLogin}
-            isButtonLoading={isButtonLoading}
+            isLoading={isLoading}
           />
         )}
         {stage === 2 && (
@@ -184,7 +181,7 @@ export function Login() {
             otp={otp}
             setOtp={setOtp}
             handleOtpVerification={handleOtpVerification}
-            isButtonLoading={isButtonLoading}
+            isLoading={isLoading}
           />
         )}
       </Card>
