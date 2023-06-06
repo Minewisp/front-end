@@ -4,17 +4,24 @@ import {
   Card,
   Center,
   FormControl,
-  FormLabel,
   HStack,
   Heading,
   Image,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   PinInput,
   PinInputField,
   Stack,
   StackDivider,
   Text,
   useColorModeValue,
+  useDisclosure,
 } from '@chakra-ui/react';
 import CopyableCode from '../utility/CopyableCode';
 import { useState } from 'react';
@@ -53,6 +60,7 @@ const LoginStage = ({
       </FormControl>
       <Button
         colorScheme="blue"
+        type="submit"
         onClick={handleLogin}
         isLoading={isButtonLoading}
         loadingText="Generating OTP..."
@@ -110,14 +118,26 @@ const OtpStage = ({ otp, setOtp, handleOtpVerification, isButtonLoading }) => {
 };
 
 export function Login() {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [stage, setStage] = useState(1);
   const [username, setUsername] = useState('');
   const [otp, setOtp] = useState('');
   const [isButtonLoading, setButtonLoading] = useState(false);
+  const [modalData, setModalData] = useState({ title: '', message: '' });
 
   const handleLogin = () => {
     setButtonLoading(true);
     setTimeout(() => {
+      if (username !== 'Steve') {
+        setModalData({
+          title: 'Error',
+          message:
+            "You don't seem to be online. Join the server to recieve an OTP.",
+        });
+        onOpen();
+        setButtonLoading(false);
+        return;
+      }
       setStage(2);
       setButtonLoading(false);
     }, 750); // just testing
@@ -168,6 +188,22 @@ export function Login() {
           />
         )}
       </Card>
+      <Modal isCentered isOpen={isOpen} onClose={onClose}>
+        <ModalOverlay
+          bg="blackAlpha.300"
+          backdropFilter="blur(10px) hue-rotate(0deg)"
+        />
+        <ModalContent>
+          <ModalHeader>{modalData.title}</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text>{modalData.message}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={onClose}>Understood</Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </Box>
   );
 }
