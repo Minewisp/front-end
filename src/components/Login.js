@@ -122,10 +122,10 @@ export function Login() {
         p={6}
         maxWidth="400px"
         boxShadow="md"
-        // borderRadius={20}
-        borderRadius={0}
-        borderBottomRightRadius={50}
-        borderTopLeftRadius={50}
+        borderRadius={20}
+        // borderRadius={0}
+        // borderBottomRightRadius={50}
+        // borderTopLeftRadius={50}
         bg={useColorModeValue('gray.50', 'gray.700')}
       >
         <Box display="flex" justifyContent="center" mb="1.4rem">
