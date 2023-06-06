@@ -19,7 +19,12 @@ import {
 import CopyableCode from '../utility/CopyableCode';
 import { useState } from 'react';
 
-const LoginStage = ({ username, setUsername, handleLogin }) => {
+const LoginStage = ({
+  username,
+  setUsername,
+  handleLogin,
+  isButtonLoading,
+}) => {
   return (
     <Stack divider={<StackDivider />} spacing={4}>
       <Box textAlign="center" spacing={4}>
@@ -49,6 +54,8 @@ const LoginStage = ({ username, setUsername, handleLogin }) => {
       <Button
         colorScheme="blue"
         onClick={handleLogin}
+        isLoading={isButtonLoading}
+        loadingText="Generating OTP..."
       >
         Generate OTP
       </Button>
@@ -56,7 +63,7 @@ const LoginStage = ({ username, setUsername, handleLogin }) => {
   );
 };
 
-const OtpStage = ({ otp, setOtp, handleOtpVerification }) => {
+const OtpStage = ({ otp, setOtp, handleOtpVerification, isButtonLoading }) => {
   return (
     <Stack divider={<StackDivider />} spacing={4}>
       <Box textAlign="center" spacing={4}>
@@ -90,7 +97,12 @@ const OtpStage = ({ otp, setOtp, handleOtpVerification }) => {
           </HStack>
         </Center>
       </FormControl>
-      <Button colorScheme="blue" onClick={handleOtpVerification}>
+      <Button
+        colorScheme="blue"
+        onClick={handleOtpVerification}
+        isLoading={isButtonLoading}
+        loadingText="Logging in..."
+      >
         Login
       </Button>
     </Stack>
@@ -105,10 +117,18 @@ export function Login() {
 
   const handleLogin = () => {
     setButtonLoading(true);
-    setTimeout(() => setStage(2), 1000); // just testing
+    setTimeout(() => {
+      setStage(2);
+      setButtonLoading(false);
+    }, 750); // just testing
   };
 
-  const handleOtpVerification = () => {};
+  const handleOtpVerification = () => {
+    setButtonLoading(true);
+    setTimeout(() => {
+      setButtonLoading(false);
+    }, 750);
+  };
 
   return (
     <Box
@@ -136,6 +156,7 @@ export function Login() {
             username={username}
             setUsername={setUsername}
             handleLogin={handleLogin}
+            isButtonLoading={isButtonLoading}
           />
         )}
         {stage === 2 && (
@@ -143,6 +164,7 @@ export function Login() {
             otp={otp}
             setOtp={setOtp}
             handleOtpVerification={handleOtpVerification}
+            isButtonLoading={isButtonLoading}
           />
         )}
       </Card>
