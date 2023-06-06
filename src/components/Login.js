@@ -101,8 +101,10 @@ export function Login() {
   const [stage, setStage] = useState(1);
   const [username, setUsername] = useState('');
   const [otp, setOtp] = useState('');
+  const [isButtonLoading, setButtonLoading] = useState(false);
 
   const handleLogin = () => {
+    setButtonLoading(true);
     setTimeout(() => setStage(2), 1000); // just testing
   };
 
@@ -120,7 +122,10 @@ export function Login() {
         p={6}
         maxWidth="400px"
         boxShadow="md"
-        borderRadius={20}
+        // borderRadius={20}
+        borderRadius={0}
+        borderBottomRightRadius={50}
+        borderTopLeftRadius={50}
         bg={useColorModeValue('gray.50', 'gray.700')}
       >
         <Box display="flex" justifyContent="center" mb="1.4rem">
