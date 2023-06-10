@@ -88,7 +88,7 @@ const OtpStage = ({ otp, setOtp, handleOtpVerification, isLoading }) => {
               autoFocus
               value={otp}
               onChange={v => setOtp(v)}
-              onComplete={handleOtpVerification}
+              onSubmit={handleOtpVerification}
               isPassword={true}
             >
               <PinInputField />
