@@ -25,6 +25,7 @@ import {
 } from '@chakra-ui/react';
 import CopyableCode from '../utility/CopyableCode';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const LoginStage = ({ username, setUsername, handleLogin, isLoading }) => {
   return (
@@ -119,6 +120,7 @@ export function Login() {
   const [otp, setOtp] = useState('');
   const [isLoading, setLoading] = useState(false);
   const [modalData, setModalData] = useState({ title: '', message: '' });
+  const navigate = useNavigate();
 
   const handleLogin = () => {
     if (isLoading) return;
@@ -144,6 +146,7 @@ export function Login() {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
+      navigate('/dashboard');
     }, 750);
   };
 
