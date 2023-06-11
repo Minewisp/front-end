@@ -115,6 +115,7 @@ export default function Dashboard() {
                     borderRadius={10}
                     p={2}
                     ml={4}
+                    alignSelf="flex-start"
                   >
                     Online
                   </Badge>
