@@ -5,7 +5,6 @@ import {
   Heading,
   Button,
   Grid,
-  GridItem,
   Divider,
   Image,
   Text,
@@ -14,9 +13,7 @@ import {
   CardHeader,
   CardBody,
   CardFooter,
-  Skeleton,
   Badge,
-  Code,
   Progress,
 } from '@chakra-ui/react';
 import {
@@ -27,7 +24,6 @@ import {
   faUser,
   faRightFromBracket,
   faBell,
-  faLifeRing,
   faQuestion,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -45,7 +41,7 @@ export default function Dashboard() {
       >
         <Flex alignItems="center">
           <Box mr={4}>
-            <Image src="logo192.png" boxSize="48px" />
+            <Image src="logo192.png" boxSize="3rem" />
           </Box>
           <Heading size="lg">Minewisp</Heading>
         </Flex>
@@ -106,42 +102,49 @@ export default function Dashboard() {
             <Card>
               <CardHeader>
                 <Flex justifyContent="space-between">
-                  <Heading size="md" alignSelf="center">
-                    MCServer
-                  </Heading>
+                  <Flex flexDirection="column">
+                    <Heading size="md" mb={1}>
+                      MCServer
+                    </Heading>
+                    <Text color="gray.500">Default server description.</Text>
+                  </Flex>
                   <Badge
                     colorScheme="green"
                     fontSize="0.8rem"
                     borderRadius={10}
                     p={2}
+                    ml={4}
                   >
                     Online
                   </Badge>
                 </Flex>
               </CardHeader>
+              {/* <Divider /> */}
               <CardBody>
-                <Grid templateColumns="auto 1fr" gap={4}>
-                  <Box>CPU Usage</Box>
-                  <Box>
-                    <Progress size="sm" value={15} borderRadius={4} />
-                    <Text mt={1} textAlign="center">
-                      15%
-                    </Text>
-                  </Box>
-                  <Box>RAM Usage</Box>
-                  <Box>
-                    <Progress size="sm" value={65} borderRadius={4} />
-                    <Text mt={1} textAlign="center">
-                      65%
-                    </Text>
-                  </Box>
-                  <Box>Disk Usage</Box>
-                  <Box>
-                    <Progress size="sm" value={35} borderRadius={4} />
-                    <Text mt={1} textAlign="center">
-                      45%
-                    </Text>
-                  </Box>
+                <Grid
+                  templateColumns="auto 1fr"
+                  gap={4}
+                  alignItems="center"
+                  rowGap={6}
+                >
+                  <TempProgressBar
+                    text="CPU Usage"
+                    progress={15}
+                    progressText="15%"
+                    color="blue"
+                  />
+                  <TempProgressBar
+                    text="RAM Usage"
+                    progress={85}
+                    progressText="1.7 GB / 2 GB"
+                    color="blue"
+                  />
+                  <TempProgressBar
+                    text="Disk Usage"
+                    progress={65}
+                    progressText="6.5 GB / 10 GB"
+                    color="blue"
+                  />
                 </Grid>
               </CardBody>
               <CardFooter>
@@ -174,5 +177,25 @@ const TempNavButton = ({ text, icon, active }) => {
       <FontAwesomeIcon icon={icon} width="1.6rem" />
       <Text ml={3}>{text}</Text>
     </Box>
+  );
+};
+
+const TempProgressBar = ({ text, progress, progressText, color }) => {
+  return (
+    <>
+      {/* <Badge textAlign="center" fontSize={14}>{text}</Badge> */}
+      <Box color="gray.400">{text}</Box>
+      <Box>
+        <Progress
+          size="xs"
+          value={progress}
+          borderRadius={2}
+          colorScheme={color}
+        />
+        <Flex mt={1} justifyContent="space-evenly">
+          <Badge colorScheme={color}>{progressText}</Badge>
+        </Flex>
+      </Box>
+    </>
   );
 };
