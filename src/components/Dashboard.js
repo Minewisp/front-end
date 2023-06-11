@@ -38,6 +38,7 @@ export default function Dashboard() {
         h="100vh"
         p={6}
         boxShadow="lg"
+        overflowY="auto"
       >
         <Flex alignItems="center">
           <Box mr={4}>
