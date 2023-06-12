@@ -103,81 +103,11 @@ export default function Dashboard() {
             spacing={4}
             templateColumns="repeat(auto-fill, minmax(400px, 500px))"
           >
-            <Card>
-              <CardHeader bg="gray.900">
-                <Flex justifyContent="space-between">
-                  <Flex flexDirection="column">
-                    <Heading size="md" mb={1}>
-                      MCServer
-                    </Heading>
-                    <Text color="gray.500">Default server description.</Text>
-                  </Flex>
-                  <Badge
-                    colorScheme="green"
-                    fontSize="0.8rem"
-                    borderRadius={10}
-                    p={2}
-                    ml={4}
-                    alignSelf="flex-start"
-                  >
-                    <Flex alignItems="center">
-                      {/* In-case I need to add something more */}
-                      <Text>Online</Text>
-                    </Flex>
-                  </Badge>
-                </Flex>
-              </CardHeader>
-              {/* <Divider /> */}
-              <CardBody>
-                <Grid
-                  templateColumns="auto 1fr"
-                  gap={4}
-                  alignItems="center"
-                  rowGap={6}
-                >
-                  <TempProgressBar
-                    text="CPU Usage"
-                    progress={15}
-                    progressText="15%"
-                    color="blue"
-                  />
-                  <TempProgressBar
-                    text="RAM Usage"
-                    progress={85}
-                    progressText="1.7 GB / 2 GB"
-                    color="blue"
-                  />
-                  <TempProgressBar
-                    text="Disk Usage"
-                    progress={65}
-                    progressText="6.5 GB / 10 GB"
-                    color="blue"
-                  />
-                </Grid>
-              </CardBody>
-              <CardFooter bg="gray.600" justifyContent="right">
-                <Flex gap={2}>
-                  <Button
-                    size="sm"
-                    leftIcon={<FontAwesomeIcon icon={faPlay} />}
-                  >
-                    Start
-                  </Button>
-                  <Button
-                    size="sm"
-                    leftIcon={<FontAwesomeIcon icon={faStop} />}
-                  >
-                    Stop
-                  </Button>
-                  <Button
-                    size="sm"
-                    leftIcon={<FontAwesomeIcon icon={faEdit} />}
-                  >
-                    Edit
-                  </Button>
-                </Flex>
-              </CardFooter>
-            </Card>
+            <TempServerCard />
+            <TempServerCard />
+            <TempServerCard />
+            <TempServerCard />
+            <TempServerCard />
           </SimpleGrid>
         </VStack>
       </Box>
@@ -224,5 +154,71 @@ const TempProgressBar = ({ text, progress, progressText, color }) => {
         </Flex>
       </Box>
     </>
+  );
+};
+
+const TempServerCard = () => {
+  return (
+    <Card>
+      <CardHeader bg="gray.900">
+        <Flex justifyContent="space-between">
+          <Flex flexDirection="column">
+            <Heading size="md" mb={1}>
+              MCServer
+            </Heading>
+            <Text color="gray.500">Default server description.</Text>
+          </Flex>
+          <Badge
+            colorScheme="green"
+            fontSize="0.8rem"
+            borderRadius={10}
+            p={2}
+            ml={4}
+            alignSelf="flex-start"
+          >
+            <Flex alignItems="center">
+              {/* In-case I need to add something more */}
+              <Text>Online</Text>
+            </Flex>
+          </Badge>
+        </Flex>
+      </CardHeader>
+      {/* <Divider /> */}
+      <CardBody>
+        <Grid templateColumns="auto 1fr" gap={4} alignItems="center" rowGap={6}>
+          <TempProgressBar
+            text="CPU Usage"
+            progress={15}
+            progressText="15%"
+            color="blue"
+          />
+          <TempProgressBar
+            text="RAM Usage"
+            progress={85}
+            progressText="1.7 GB / 2 GB"
+            color="blue"
+          />
+          <TempProgressBar
+            text="Disk Usage"
+            progress={65}
+            progressText="6.5 GB / 10 GB"
+            color="blue"
+          />
+        </Grid>
+      </CardBody>
+      <CardFooter bg="gray.600" justifyContent="right" py={4}>
+        <Flex gap={2}>
+          <Button size="sm" leftIcon={<FontAwesomeIcon icon={faPlay} />}>
+            Start
+          </Button>
+          <Button size="sm" leftIcon={<FontAwesomeIcon icon={faStop} />}>
+            Stop
+          </Button>
+          <Button size="sm" leftIcon={<FontAwesomeIcon icon={faEdit} />}>
+            Edit
+          </Button>
+        </Flex>
+      </CardFooter>
+    </Card>
   );
 };
