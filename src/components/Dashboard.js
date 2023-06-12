@@ -94,7 +94,7 @@ export default function Dashboard() {
         </VStack>
       </Box>
 
-      <Box flex="1" p={8}>
+      <Box flex={1} p={8} h="100vh" overflowY="auto">
         <VStack align="stretch">
           <Heading size="lg">My Servers</Heading>
           <Text color="gray.400">A list of all the servers you own.</Text>
