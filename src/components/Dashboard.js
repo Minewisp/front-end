@@ -25,6 +25,9 @@ import {
   faRightFromBracket,
   faBell,
   faQuestion,
+  faPlay,
+  faEdit,
+  faStop,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -101,7 +104,7 @@ export default function Dashboard() {
             templateColumns="repeat(auto-fill, minmax(400px, 500px))"
           >
             <Card>
-              <CardHeader>
+              <CardHeader bg="gray.900">
                 <Flex justifyContent="space-between">
                   <Flex flexDirection="column">
                     <Heading size="md" mb={1}>
@@ -117,7 +120,10 @@ export default function Dashboard() {
                     ml={4}
                     alignSelf="flex-start"
                   >
-                    Online
+                    <Flex alignItems="center">
+                      {/* In-case I need to add something more */}
+                      <Text>Online</Text>
+                    </Flex>
                   </Badge>
                 </Flex>
               </CardHeader>
@@ -149,8 +155,27 @@ export default function Dashboard() {
                   />
                 </Grid>
               </CardBody>
-              <CardFooter>
-                <Button>View here</Button>
+              <CardFooter bg="gray.600" justifyContent="right">
+                <Flex gap={2}>
+                  <Button
+                    size="sm"
+                    leftIcon={<FontAwesomeIcon icon={faPlay} />}
+                  >
+                    Start
+                  </Button>
+                  <Button
+                    size="sm"
+                    leftIcon={<FontAwesomeIcon icon={faStop} />}
+                  >
+                    Stop
+                  </Button>
+                  <Button
+                    size="sm"
+                    leftIcon={<FontAwesomeIcon icon={faEdit} />}
+                  >
+                    Edit
+                  </Button>
+                </Flex>
               </CardFooter>
             </Card>
           </SimpleGrid>
