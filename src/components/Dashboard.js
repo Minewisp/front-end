@@ -196,13 +196,13 @@ const TempServerCard = () => {
             text="RAM Usage"
             progress={85}
             progressText="1.7 GB / 2 GB"
-            color="blue"
+            color="red"
           />
           <TempProgressBar
             text="Disk Usage"
             progress={65}
             progressText="6.5 GB / 10 GB"
-            color="blue"
+            color="yellow"
           />
         </Grid>
       </CardBody>
