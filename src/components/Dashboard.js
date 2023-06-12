@@ -100,7 +100,7 @@ export default function Dashboard() {
           <Text color="gray.400">A list of all the servers you own.</Text>
           <Divider my={3} />
           <SimpleGrid
-            spacing={4}
+            spacing={8}
             templateColumns="repeat(auto-fill, minmax(400px, auto))"
           >
             <TempServerCard />
@@ -159,8 +159,8 @@ const TempProgressBar = ({ text, progress, progressText, color }) => {
 
 const TempServerCard = () => {
   return (
-    <Card>
-      <CardHeader bg="gray.900">
+    <Card borderRadius={10}>
+      <CardHeader bg="gray.900" borderTopRadius="inherit">
         <Flex justifyContent="space-between">
           <Flex flexDirection="column">
             <Heading size="md" mb={1}>
@@ -206,7 +206,12 @@ const TempServerCard = () => {
           />
         </Grid>
       </CardBody>
-      <CardFooter bg="gray.600" justifyContent="right" py={4}>
+      <CardFooter
+        bg="gray.600"
+        justifyContent="right"
+        py={4}
+        borderBottomRadius="inherit"
+      >
         <Flex gap={2}>
           <Button size="sm" leftIcon={<FontAwesomeIcon icon={faPlay} />}>
             Start
