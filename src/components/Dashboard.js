@@ -101,7 +101,7 @@ export default function Dashboard() {
           <Divider my={3} />
           <SimpleGrid
             spacing={4}
-            templateColumns="repeat(auto-fill, minmax(400px, 500px))"
+            templateColumns="repeat(auto-fill, minmax(400px, auto))"
           >
             <TempServerCard />
             <TempServerCard />
